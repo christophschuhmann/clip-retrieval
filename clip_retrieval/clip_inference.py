@@ -302,7 +302,8 @@ def clip_inference(
     wds_caption_key="txt",
     clip_model="ViT-B/32",
     mclip_model="sentence-transformers/clip-ViT-B-32-multilingual-v1",
-    use_mclip=False
+    use_mclip=False,
+):
     """clip inference goes from a image text dataset to clip embeddings"""
 
     #import clip  # pylint: disable=import-outside-toplevel
