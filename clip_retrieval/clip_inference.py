@@ -303,9 +303,8 @@ def clip_inference(
     clip_model="ViT-B/32",
     mclip_model="sentence-transformers/clip-ViT-B-32-multilingual-v1",
     use_mclip=False
-    import os 
     """clip inference goes from a image text dataset to clip embeddings"""
-    print(os.getcwd())
+
     #import clip  # pylint: disable=import-outside-toplevel
     from clip_retrieval.open_clip_inference.load_model import load_model
     from sentence_transformers import SentenceTransformer  # pylint: disable=import-outside-toplevel
