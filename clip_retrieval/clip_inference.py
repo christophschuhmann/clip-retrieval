@@ -127,7 +127,7 @@ def create_webdataset(
     import webdataset as wds  # pylint: disable=import-outside-toplevel
     import os
     print(os.getcwd())
-    from .open_clip_inference.clip.load_model import preprocess_txt
+    from .open_clip_inference.load_model import preprocess_txt
 
     dataset = wds.WebDataset(urls, cache_dir=cache_path, cache_size=10 ** 10, handler=wds.handlers.warn_and_continue)
     tokenizer = lambda text: preprocess_txt(text) # clip.tokenize([text], truncate=True)[0]
