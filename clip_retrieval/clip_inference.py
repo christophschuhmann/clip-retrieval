@@ -30,7 +30,7 @@ def get_image_dataset():
         def __init__(self, preprocess, folder, enable_text=True, enable_image=True, enable_metadata=False):
             super().__init__()
             #import clip  # pylint: disable=import-outside-toplevel
-            from open_clip_inference.clip.load_model import load_model
+            from open_clip_inference.load_model import load_model
             
             path = Path(folder)
             self.enable_text = enable_text
@@ -307,7 +307,7 @@ def clip_inference(
     """clip inference goes from a image text dataset to clip embeddings"""
 
     #import clip  # pylint: disable=import-outside-toplevel
-    from open_clip_inference.clip.load_model import load_model
+    from open_clip_inference.load_model import load_model
     from sentence_transformers import SentenceTransformer  # pylint: disable=import-outside-toplevel
     from torch.utils.data import DataLoader  # pylint: disable=import-outside-toplevel
     from torch.utils.data.dataloader import default_collate  # pylint: disable=import-outside-toplevel
