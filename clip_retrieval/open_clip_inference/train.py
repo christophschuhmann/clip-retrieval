@@ -15,7 +15,7 @@ import sys
 import pdb
 import wandb
 
-import .logging
+import logging
 
 def is_master(args):
     return (not args.distributed) or args.gpu == 0
