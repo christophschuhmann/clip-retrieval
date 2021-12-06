@@ -44,11 +44,11 @@ from .train import train, evaluate
 from .data import get_data
 from .params import parse_args
 from .logger import setup_primary_logging, setup_worker_logging
-from .open_clip_inference.scheduler import cosine_lr
+from .scheduler import cosine_lr
 
 import torch.nn as nn
 
-from clip import tokenize
+from .clip import tokenize
 import webdataset as wds
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler
 from torch.utils.data.distributed import DistributedSampler
