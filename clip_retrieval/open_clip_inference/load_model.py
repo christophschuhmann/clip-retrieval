@@ -178,7 +178,7 @@ def load_model(checkpoint_pt, checkpoint_json,gpu=None):
 
     if gpu is None:
             model.float()
-            checkpoint = torch.load(checkpoint_json, map_location=torch.device('cpu') )
+            checkpoint = torch.load(checkpoint_pt, map_location=torch.device('cpu') )
     else: 
           # Map model to be loaded to specified single gpu.
           loc = "cuda:{}".format(gpu)
