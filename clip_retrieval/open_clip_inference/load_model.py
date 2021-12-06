@@ -1,8 +1,8 @@
-model_config_file = "/content/open_clip/src/training/model_configs/RN101.json"
-gpu =0
-resume= "/content/rn101.pt"
-batch_size = 32
-wds_shards= "/content/{00004..00004}.tar"
+#model_config_file = "/content/open_clip/src/training/model_configs/RN101.json"
+#gpu =0
+#resume= "/content/rn101.pt"
+#batch_size = 32
+#wds_shards= "/content/{00004..00004}.tar"
 
 import hashlib
 import os
