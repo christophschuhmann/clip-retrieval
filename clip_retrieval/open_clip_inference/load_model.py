@@ -56,7 +56,7 @@ import torchvision.datasets as datasets
 
 
 
-shardlist = wds.PytorchShardList(wds_shards, shuffle=False)
+#shardlist = wds.PytorchShardList(wds_shards, shuffle=False)
 
 def preprocess_txt(text):
     return tokenize([str(text)])[0]
