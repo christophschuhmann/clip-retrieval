@@ -314,10 +314,12 @@ def clip_inference(
     import torch  # pylint: disable=import-outside-toplevel
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    gpu = "0" if torch.cuda.is_available() else None
     #model, preprocess = clip.load(clip_model, device=device, jit=False)
     #model_img = model.encode_image
     #model_txt = model.encode_text
-    
+    checkpoint_pt ="/content/rn101.pt"
+    checkpoint_json = "/content/RN101.json"
     model_img, model_txt, preprocess_im, preprocess_txt = load_model(checkpoint_pt=checkpoint_pt, checkpoint_json=checkpoint_json, gpu=gpu)
 
     if use_mclip:
