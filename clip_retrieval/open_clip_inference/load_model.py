@@ -62,7 +62,8 @@ def preprocess_txt(text):
     return tokenize([str(text)])[0]
 
 def load_model(checkpoint_pt, checkpoint_json,gpu=None):
-
+    model_config_file = checkpoint_json
+    
     def preprocess_txt(text):
         return tokenize([str(text)])[0]
 
