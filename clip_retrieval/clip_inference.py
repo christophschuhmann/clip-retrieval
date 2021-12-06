@@ -321,9 +321,9 @@ def clip_inference(
     gpu = "0" if torch.cuda.is_available() else None
     if checkpoint_pt != None:
         from clip_retrieval.open_clip_inference.load_model import load_model
-         model_img, model_txt, preprocess_im, preprocess_txt = load_model(checkpoint_pt=checkpoint_pt, checkpoint_json=checkpoint_json, gpu=gpu)
+        model_img, model_txt, preprocess_im, preprocess_txt = load_model(checkpoint_pt=checkpoint_pt, checkpoint_json=checkpoint_json, gpu=gpu)
     else:
-
+        import clip
         model, preprocess_im = clip.load(clip_model, device=device, jit=False)
         model_img = model.encode_image
         model_txt = model.encode_text
