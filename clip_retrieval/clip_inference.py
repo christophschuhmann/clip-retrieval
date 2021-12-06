@@ -30,7 +30,7 @@ def get_image_dataset():
         def __init__(self, preprocess, folder, enable_text=True, enable_image=True, enable_metadata=False):
             super().__init__()
             #import clip  
-            from clip_retrieval.open_clip_inference.load_model import load_model
+            from .open_clip_inference.load_model import load_model
             
             path = Path(folder)
             self.enable_text = enable_text
@@ -125,7 +125,9 @@ def create_webdataset(
     """Create a WebDataset reader, it can read a webdataset of image, text and json"""
     #import clip  # pylint: disable=import-outside-toplevel
     import webdataset as wds  # pylint: disable=import-outside-toplevel
-    from clip_retrieval.open_clip_inference.clip.load_model import preprocess_txt
+    import os
+    print(os.getcwd())
+    from .open_clip_inference.clip.load_model import preprocess_txt
 
     dataset = wds.WebDataset(urls, cache_dir=cache_path, cache_size=10 ** 10, handler=wds.handlers.warn_and_continue)
     tokenizer = lambda text: preprocess_txt(text) # clip.tokenize([text], truncate=True)[0]
