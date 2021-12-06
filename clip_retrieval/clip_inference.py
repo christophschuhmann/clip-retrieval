@@ -305,6 +305,8 @@ def clip_inference(
     clip_model="ViT-B/32",
     mclip_model="sentence-transformers/clip-ViT-B-32-multilingual-v1",
     use_mclip=False,
+    checkpoint_pt= None,
+    checkpoint_json= None,
 ):
     """clip inference goes from a image text dataset to clip embeddings"""
 
@@ -320,8 +322,8 @@ def clip_inference(
     #model, preprocess = clip.load(clip_model, device=device, jit=False)
     #model_img = model.encode_image
     #model_txt = model.encode_text
-    checkpoint_pt ="/content/rn101.pt"
-    checkpoint_json = "/content/RN101.json"
+    #checkpoint_pt ="/content/rn101.pt"
+    #checkpoint_json = "/content/RN101.json"
     model_img, model_txt, preprocess_im, preprocess_txt = load_model(checkpoint_pt=checkpoint_pt, checkpoint_json=checkpoint_json, gpu=gpu)
 
     if use_mclip:
