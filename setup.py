@@ -40,6 +40,8 @@ if __name__ == "__main__":
             "fire",
             "torch",
             "torchvision",
+            "ftfy",
+            "braceexpand",
             "numpy",
             "faiss-cpu",
             "flask",
