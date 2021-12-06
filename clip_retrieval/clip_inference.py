@@ -29,8 +29,9 @@ def get_image_dataset():
 
         def __init__(self, preprocess, folder, enable_text=True, enable_image=True, enable_metadata=False):
             super().__init__()
-            import clip  # pylint: disable=import-outside-toplevel
-
+            #import clip  # pylint: disable=import-outside-toplevel
+            from open_clip_inference.clip.load_model import load_model
+            
             path = Path(folder)
             self.enable_text = enable_text
             self.enable_image = enable_image
@@ -122,11 +123,12 @@ def create_webdataset(
     cache_path=None,
 ):
     """Create a WebDataset reader, it can read a webdataset of image, text and json"""
-    import clip  # pylint: disable=import-outside-toplevel
+    #import clip  # pylint: disable=import-outside-toplevel
     import webdataset as wds  # pylint: disable=import-outside-toplevel
+    from open_clip_inference.clip.load_model import preprocess_txt
 
     dataset = wds.WebDataset(urls, cache_dir=cache_path, cache_size=10 ** 10, handler=wds.handlers.warn_and_continue)
-    tokenizer = lambda text: clip.tokenize([text], truncate=True)[0]
+    tokenizer = lambda text: preprocess_txt(text) # clip.tokenize([text], truncate=True)[0]
 
     def filter_dataset(item):
         if enable_text and caption_key not in item:
@@ -304,29 +306,33 @@ def clip_inference(
 ):
     """clip inference goes from a image text dataset to clip embeddings"""
 
-    import clip  # pylint: disable=import-outside-toplevel
+    #import clip  # pylint: disable=import-outside-toplevel
+    from open_clip_inference.clip.load_model import load_model
     from sentence_transformers import SentenceTransformer  # pylint: disable=import-outside-toplevel
     from torch.utils.data import DataLoader  # pylint: disable=import-outside-toplevel
     from torch.utils.data.dataloader import default_collate  # pylint: disable=import-outside-toplevel
     import torch  # pylint: disable=import-outside-toplevel
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model, preprocess = clip.load(clip_model, device=device, jit=False)
-    model_img = model.encode_image
-    model_txt = model.encode_text
+    #model, preprocess = clip.load(clip_model, device=device, jit=False)
+    #model_img = model.encode_image
+    #model_txt = model.encode_text
+    
+    model_img, model_txt, preprocess_im, preprocess_txt = load_model(checkpoint_pt=checkpoint_pt, checkpoint_json=checkpoint_json, gpu=gpu)
+
     if use_mclip:
         print("\nLoading MCLIP model for text embedding\n")
         mclip = SentenceTransformer(mclip_model)
         model_txt = mclip.encode
     if input_format == "files":
-        dataset = get_image_dataset()(preprocess, input_dataset, enable_text=enable_text, enable_image=enable_image)
+        dataset = get_image_dataset()(preprocess_im, input_dataset, enable_text=enable_text, enable_image=enable_image)
         enable_text = dataset.enable_text
         enable_image = dataset.enable_image
         enable_metadata = dataset.enable_metadata
     elif input_format == "webdataset":
         dataset = create_webdataset(
             input_dataset,
-            preprocess,
+            preprocess_im,
             enable_text,
             enable_image,
             image_key=wds_image_key,
