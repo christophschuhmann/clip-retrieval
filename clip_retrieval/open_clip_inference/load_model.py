@@ -18,8 +18,8 @@ from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normal
 from tqdm import tqdm
 
 
-from clip_retrieval.open_clip_inference.model import build_model
-from clip_retrieval.open_clip_inference.tokenizer import SimpleTokenizer as _Tokenizer
+from .model import build_model
+from .tokenizer import SimpleTokenizer as _Tokenizer
 
 
 
@@ -38,13 +38,13 @@ import torch.backends.cudnn as cudnn
 from torch.utils.tensorboard import SummaryWriter
 from torch.cuda.amp import GradScaler
 
-from clip_retrieval.open_clip_inference.clip import _transform, load
-from clip_retrieval.open_clip_inference.model import convert_weights, CLIP
-from clip_retrieval.open_clip_inference.train import train, evaluate
-from clip_retrieval.open_clip_inference.data import get_data
-from clip_retrieval.open_clip_inference.params import parse_args
-from clip_retrieval.open_clip_inference.logger import setup_primary_logging, setup_worker_logging
-from clip_retrieval.open_clip_inference.scheduler import cosine_lr
+from .clip import _transform, load
+from .model import convert_weights, CLIP
+from .train import train, evaluate
+from .data import get_data
+from .params import parse_args
+from .logger import setup_primary_logging, setup_worker_logging
+from .open_clip_inference.scheduler import cosine_lr
 
 import torch.nn as nn
 
