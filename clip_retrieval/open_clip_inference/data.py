@@ -25,7 +25,7 @@ import webdataset as wds
 
 
 
-from clip import tokenize
+from .clip import tokenize
 
 
 class CsvDataset(Dataset):
