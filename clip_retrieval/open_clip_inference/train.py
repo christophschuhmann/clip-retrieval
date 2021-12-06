@@ -9,13 +9,13 @@ import torch.nn as nn
 from torch.cuda.amp import autocast
 import torch.distributed as dist
 
-from zero_shot import zero_shot_eval
+#from zero_shot import zero_shot_eval
 
 import sys
 import pdb
 import wandb
 
-import logging
+import .logging
 
 def is_master(args):
     return (not args.distributed) or args.gpu == 0
